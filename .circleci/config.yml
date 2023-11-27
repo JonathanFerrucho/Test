@@ -42,7 +42,7 @@ jobs:
       - image: cimg/node:17.2.0
     steps:
       - run: |
-          echo $BASH_ENV
+           source "$BASH_ENV"
   
 
 # Orchestrate jobs using workflows
