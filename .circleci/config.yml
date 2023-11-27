@@ -1,5 +1,7 @@
 version: 2.1
 
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
@@ -39,18 +41,15 @@ jobs:
     docker: 
       - image: cimg/node:17.2.0
     steps:
-      - run: |
-          printenv BASH_ENV
+      - run: echo $DOD_FAILED
   
 
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   conditional-approval-workflow:
     jobs:
-      - Approve validation of DoD:
-          type: approval
-      - Validate DoD:
-          requires:
-            - Approve validation of DoD
+      - Validate DoD
       - Echo Env Variable:
           requires:
             - Validate DoD
