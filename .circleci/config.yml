@@ -40,7 +40,7 @@ jobs:
       - image: cimg/node:17.2.0
     steps:
       - run: |
-          printenv VALIDATION_RESULT
+          printenv BASH_ENV
   
 
 workflows:
