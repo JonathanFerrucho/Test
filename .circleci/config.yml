@@ -39,7 +39,8 @@ jobs:
     docker: 
       - image: cimg/node:17.2.0
     steps:
-      - run: echo $BASH_ENV
+      - run: |
+          printenv VALIDATION_RESULT
   
 
 workflows:
