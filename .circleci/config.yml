@@ -1,16 +1,5 @@
 version: 2.1
 
-parameters:
-  arguments:
-    default: ""
-            description: |
-                Optional additional arguments to pass to the `aws sync` command (e.g., `--acl public-read`). Note: if passing a multi-line value to this parameter, include `\` characters after each line, so the Bash shell can correctly interpret the entire command.
-            type: string
-        aws-access-key-id:
-            default: AWS_ACCESS_KEY_ID
-            description: aws access key id override
-            type: env_var_name
-
 jobs:
   say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
