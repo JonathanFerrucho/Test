@@ -41,8 +41,12 @@ jobs:
     docker: 
       - image: cimg/node:17.2.0
     steps:
+      - attach_workspace:
+          at: .
       - run: |
-           source "$BASH_ENV"
+          cat bash.env > $BASH_ENV
+      - run: |
+          printenv VALIDATION_RESULT
   
 
 # Orchestrate jobs using workflows
