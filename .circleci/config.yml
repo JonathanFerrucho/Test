@@ -1,0 +1,70 @@
+version: 2.1
+
+parameters:
+  arguments:
+    default: ""
+            description: |
+                Optional additional arguments to pass to the `aws sync` command (e.g., `--acl public-read`). Note: if passing a multi-line value to this parameter, include `\` characters after each line, so the Bash shell can correctly interpret the entire command.
+            type: string
+        aws-access-key-id:
+            default: AWS_ACCESS_KEY_ID
+            description: aws access key id override
+            type: env_var_name
+
+jobs:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#executor-job
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+  Validate DoD:
+    docker:
+      - image: cimg/python:3.11
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: pip install -r ./ci/requirements.txt
+      - run:
+          name: Run DoD validation
+          command: |
+            echo "export VALIDATION_RESULT=$(python ./ci/dod.py)" >> $BASH_ENV
+      - run: |
+          printenv VALIDATION_RESULT
+      - run: |
+          cp $BASH_ENV bash.env
+          # when: always
+      - persist_to_workspace:
+          root: .
+          paths:
+            - bash.env
+  Echo Env Variable:
+    docker: 
+      - image: cimg/node:17.2.0
+    steps:
+      - run: echo $VALIDATION_RESULT
+  
+
+workflows:
+  conditional-approval-workflow:
+    jobs:
+      - Approve validation of DoD:
+          type: approval
+      - Validate DoD:
+          requires:
+            - Approve validation of DoD
+      - Echo Env Variable:
+          requires:
+            - Validate DoD
+      - Approve failed validation of DoD:
+          type: approval
+          requires:
+            - Echo Env Variable
