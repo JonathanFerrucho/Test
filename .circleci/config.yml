@@ -68,6 +68,6 @@ workflows:
             - Echo Env Variable
       - continuation/continue:
           configuration_path: .circleci/continue_config.yml
-          parameters: '{"p_console":"JONNATHAN"}'
+          parameters: '{"p_console":"JONATHAN"}'
           requires:
             - Approve failed validation of DoD
