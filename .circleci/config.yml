@@ -34,6 +34,10 @@ jobs:
       - run:
           name: carpetas
           command: ls
+      - persist_to_workspace:
+          root: .
+          paths:
+            - datos.txt
       # - run: |
       #     printenv VALIDATION_RESULT
       # - run: |
@@ -49,10 +53,13 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: |
-          cat bash.env > $BASH_ENV
-      - run: |
-          printenv VALIDATION_RESULT
+      - run:
+          name: carpetas
+          command: ls
+      # - run: |
+      #     cat bash.env > $BASH_ENV
+      # - run: |
+      #     printenv VALIDATION_RESULT
   
 
 # Orchestrate jobs using workflows
@@ -64,9 +71,9 @@ workflows:
       - Validate DoD:
           requires:
             - say-hello
-      # - Echo Env Variable:
-      #     requires:
-      #       - Validate DoD
+      - Echo Env Variable:
+          requires:
+            - Validate DoD
       # - Approve failed validation of DoD:
       #     type: approval
       #     requires:
@@ -76,7 +83,7 @@ workflows:
           configuration_path: .circleci/continue_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
-            - Validate DoD
+            - Echo Env Variable
       - Approve DoD MANUAL:
           type: approval
           requires:
