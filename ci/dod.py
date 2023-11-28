@@ -6,8 +6,8 @@ import os
 
 async def main():
     print("failed")
-    archi1=open("datos.txt","w") 
-    archi1.write("failed") 
+    archi1=open("datos.json","w") 
+    archi1.write('{"p_console":"JONATHAN"}') 
     archi1.close()
     # raise Exception("failed")
     return 1
