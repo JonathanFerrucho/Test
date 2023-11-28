@@ -58,16 +58,28 @@ jobs:
 workflows:
   conditional-approval-workflow:
     jobs:
-      - Validate DoD
-      - Echo Env Variable:
+      - say-hello
+      - Validate DoD:
           requires:
-            - Validate DoD
-      - Approve failed validation of DoD:
-          type: approval
-          requires:
-            - Echo Env Variable
-      - continuation/continue:
+            - say-hello
+      # - Echo Env Variable:
+      #     requires:
+      #       - Validate DoD
+      # - Approve failed validation of DoD:
+      #     type: approval
+      #     requires:
+      #       - Echo Env Variable
+      - continuation/continue Exitoso:
           configuration_path: .circleci/continue_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
-            - Approve failed validation of DoD
+            - say-hello
+      - Approve DoD MANUAL:
+          type: approval
+          requires:
+            - say-hello
+      - continuation/continue MANUAL:
+          configuration_path: .circleci/continue_config.yml
+          parameters: '{"p_console":"JONATHAN"}'
+          requires:
+            - Approve DoD MANUAL
