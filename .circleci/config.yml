@@ -1,5 +1,9 @@
 version: 2.1
 
+setup: true
+orbs:
+  continuation: circleci/continuation@1.0.0
+  
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -62,3 +66,8 @@ workflows:
           type: approval
           requires:
             - Echo Env Variable
+      - continuation/continue:
+          configuration_path: .circleci/continue_config.yml
+          parameters: '{"p_console":"JONNATHAN"}'
+          requires:
+            - Approve failed validation of DoD
