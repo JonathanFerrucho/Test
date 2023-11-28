@@ -73,7 +73,7 @@ workflows:
           configuration_path: .circleci/continue_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
-            - say-hello
+            - Validate DoD
       - Approve DoD MANUAL:
           type: approval
           requires:
