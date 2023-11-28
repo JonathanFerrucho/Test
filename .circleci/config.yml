@@ -81,7 +81,7 @@ workflows:
       - continuation/continue:
           name: continue automatico
           configuration_path: .circleci/continue_config.yml
-          parameters: datos.json
+          parameters: /home/circleci/datos.json
           requires:
             - Echo Env Variable
       - Approve DoD MANUAL:
