@@ -24,6 +24,6 @@ workflows:
   jobs continue success:
     when:
       not:
-        equal: [ failed, << pipeline.trigger_source >> ]
+        equal: [ failed, << pipeline.parameters.p_console >> ]
     jobs:
       - say-hello
