@@ -56,6 +56,10 @@ jobs:
       - run:
           name: carpetas
           command: ls
+      - continuation/continue:
+          name: continue automatico
+          configuration_path: .circleci/continue_config.yml
+          parameters: datos.json
       # - run: |
       #     cat bash.env > $BASH_ENV
       # - run: |
@@ -78,12 +82,12 @@ workflows:
       #     type: approval
       #     requires:
       #       - Echo Env Variable
-      - continuation/continue:
-          name: continue automatico
-          configuration_path: .circleci/continue_config.yml
-          parameters: /home/circleci/datos.json
-          requires:
-            - Echo Env Variable
+      # - continuation/continue:
+      #     name: continue automatico
+      #     configuration_path: .circleci/continue_config.yml
+      #     parameters: /home/circleci/datos.json
+      #     requires:
+      #       - Echo Env Variable
       - Approve DoD MANUAL:
           type: approval
           requires:
