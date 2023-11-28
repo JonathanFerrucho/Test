@@ -1,0 +1,16 @@
+version: 2.1
+
+parameters:
+  p_console:
+    type: string
+    default: "current"
+
+jobs:
+   say-hello:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, << pipeline.parameters.p_console >>"
