@@ -37,7 +37,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - datos.txt
+            - datos.json
       # - run: |
       #     printenv VALIDATION_RESULT
       # - run: |
