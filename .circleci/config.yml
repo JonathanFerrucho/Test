@@ -31,6 +31,9 @@ jobs:
       - run:
           name: Run DoD validation
           command: python ./ci/dod.py
+      - run:
+          name: carpetas
+          command: ls
       # - run: |
       #     printenv VALIDATION_RESULT
       # - run: |
