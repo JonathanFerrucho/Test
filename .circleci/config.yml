@@ -57,7 +57,8 @@ jobs:
 workflows:
   conditional-approval-workflow:
     jobs:
-      - say-hello
+      - say-hello:
+        name: JOBS ANTES DE PROD
       - Validate DoD:
           requires:
             - say-hello
