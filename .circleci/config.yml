@@ -30,17 +30,16 @@ jobs:
           command: pip install -r ./ci/requirements.txt
       - run:
           name: Run DoD validation
-          command: |
-            echo "export VALIDATION_RESULT=$(python ./ci/dod.py)" >> $BASH_ENV
-      - run: |
-          printenv VALIDATION_RESULT
-      - run: |
-          cp $BASH_ENV bash.env
-          # when: always
-      - persist_to_workspace:
-          root: .
-          paths:
-            - bash.env
+          command: python ./ci/dod.py
+      # - run: |
+      #     printenv VALIDATION_RESULT
+      # - run: |
+      #     cp $BASH_ENV bash.env
+      #     # when: always
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - bash.env
   Echo Env Variable:
     docker: 
       - image: cimg/node:17.2.0
@@ -53,8 +52,6 @@ jobs:
           printenv VALIDATION_RESULT
   
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   conditional-approval-workflow:
     jobs:
