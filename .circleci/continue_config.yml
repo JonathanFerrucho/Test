@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   p_console:
     type: string
-    default: "current"
+    default: "passed"
 
 jobs:
    say-hello:
@@ -16,6 +16,14 @@ jobs:
           command: "echo Hello, << pipeline.parameters.p_console >>"
 
 workflows:
-  jobs continue:
+  jobs continue failed:
+    when:
+      equal: [ failed, << pipeline.parameters.p_console >> ]
+    jobs:
+      - say-hello
+  jobs continue success:
+    when:
+      not:
+        equal: [ failed, << pipeline.trigger_source >> ]
     jobs:
       - say-hello
