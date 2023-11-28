@@ -81,7 +81,7 @@ workflows:
       - continuation/continue:
           name: continue automatico
           configuration_path: .circleci/continue_config.yml
-          parameters: '{"p_console":"JONATHAN"}'
+          parameters: '{"p_console": cat datos.txt}'
           requires:
             - Echo Env Variable
       - Approve DoD MANUAL:
