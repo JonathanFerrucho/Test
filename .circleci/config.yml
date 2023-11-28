@@ -69,7 +69,7 @@ workflows:
       #     type: approval
       #     requires:
       #       - Echo Env Variable
-      - continuation/continue Exitoso:
+      - continuation/continue:
           configuration_path: .circleci/continue_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
@@ -78,7 +78,7 @@ workflows:
           type: approval
           requires:
             - say-hello
-      - continuation/continue MANUAL:
+      - continuation/continue:
           configuration_path: .circleci/continue_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
