@@ -51,6 +51,9 @@ jobs:
     docker: 
       - image: cimg/node:17.2.0
     steps:
+      - run:
+          name: carpetas
+          command: ls
       - attach_workspace:
           at: .
       - run:
