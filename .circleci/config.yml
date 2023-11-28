@@ -60,6 +60,9 @@ jobs:
       - run:
           name: carpetas
           command: ls
+      - run:
+          name: var archivo
+          command: cat datos.json
       - continuation/continue:
           configuration_path: .circleci/continue_config.yml
           parameters: datos.json
