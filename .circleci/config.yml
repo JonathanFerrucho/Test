@@ -89,11 +89,11 @@ workflows:
       #     requires:
       #       - Echo Env Variable
       - continuation/continue:
-          name: continue manual
+          name: continue automatico
           configuration_path: .circleci/continue_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
-            - Approve DoD MANUAL
+            - Echo Env Variable
       - Approve DoD MANUAL:
           type: approval
           requires:
