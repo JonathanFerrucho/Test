@@ -9,7 +9,7 @@ async def main():
     archi1=open("datos.json","w") 
     archi1.write('{"p_console":"failed"}') 
     archi1.close()
-    # raise Exception("failed")
+    raise Exception("failed")
     return 1
 
 anyio.run(main)
