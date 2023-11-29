@@ -90,7 +90,7 @@ workflows:
       #       - Echo Env Variable
       - continuation/continue:
           name: continue automatico
-          configuration_path: .circleci/continue_config.yml
+          configuration_path: .circleci/deploy_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
             - Echo Env Variable
@@ -100,7 +100,7 @@ workflows:
             - say-hello
       - continuation/continue:
           name: continue manual
-          configuration_path: .circleci/continue_config.yml
+          configuration_path: .circleci/deploy_config.yml
           parameters: '{"p_console":"JONATHAN"}'
           requires:
             - Approve DoD MANUAL
